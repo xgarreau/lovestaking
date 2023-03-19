@@ -33,11 +33,14 @@ nav li {
   padding: 10px 20px;
 }
 
+nav a {
+  font-size: calc(8px + 2vmin);
+}
+
 nav a,
 footer a {
   text-decoration: none;
   color: #f0f;
-  font-size: calc(8px + 2vmin);
 }
 
 nav a:hover,
