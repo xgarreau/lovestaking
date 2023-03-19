@@ -220,6 +220,7 @@ function App() {
           }
         </header>
       </div>
+      <footer>Made with 💗 on HorizenEON Yuma testnet by <a href="https://twitter.com/xgarreau">xgarreau</a></footer>
     </>  
   );
 }

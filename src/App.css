@@ -2,11 +2,22 @@ body {
   margin: 0;
   padding: 0;
   color: #f0f;
-  background-color: #000;
+  background-color: #333;
+}
+
+footer {
+  background-color: #333;
+  border-top: 3px solid #f0f;
+  text-align: right;
+  padding: 10px 20px;
+}
+
+h1 {
+  margin: 0;
+  padding: 0.67em;
 }
 
 nav {
-  background-color: #333;
   border-bottom: 3px solid #f0f;
   text-align: center;
 }
@@ -34,7 +45,7 @@ nav a:hover {
 
 .App {
   text-align: center;
-  min-height: 100vh;
+  background-color: #000;
 }
 
 .App-logo {
