@@ -143,67 +143,84 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <h1>The LOVE staking facility</h1>
-      <header className="App-header">
-        {isConnected === true ?
-          <>
-            <div className="header-container"> 
-              <div className="header-image">
-                <img src="/staking.jpg" className="App-logo" alt="logo" />
-              </div>
-              <div className="header-infos">
-                <p>
-                  Account: {account.substring(0, 6)+'...'+account.substring(account.length-4, account.length)}<br />
-                  ZEN Balance: {parseFloat(balance > 0.000000001 ? balance : 0).toFixed(3)}<br />
-                  $LOVE Balance: {parseFloat(loveBalance > 0.000000001 ? loveBalance : 0).toFixed(3)}<br />
-                  $LOVE Staked: {parseFloat(stakeBalance > 0.000000001 ? stakeBalance : 0).toFixed(3)}<br />
-                  $LOVE Rewards: {parseFloat(rewardsBalance > 0.000000001 ? rewardsBalance : 0).toFixed(3)}
-                </p>
-              </div>
-            </div>
-            {
-              stakeBalance == 0 && 
-              <div className="inputDiv">
-                <div className="inputToken">LOVE</div>
-                <input type="text" value={stakeAmount} onChange={(e) => setStakeAmount(e.target.value)} />
-                <div className="inputQties">
-                <a href="#25" onClick={(e) => setStakeAmount(loveBalance/4)}>25%</a>
-                <a href="#50" onClick={(e) => setStakeAmount(loveBalance/2)}>50%</a>
-                <a href="#75" onClick={(e) => setStakeAmount(loveBalance*3/4)}>75%</a>
-                <a href="#100" onClick={(e) => setStakeAmount(loveBalance)}>100%</a>
+    <>
+      <nav>
+        <ul>
+          <li>
+            <a href="https://lovefaucet.mescryptos.fr/">Faucet</a>
+          </li>
+          <li>💗</li>
+          <li>
+            <a href="https://lovestore.mescryptos.fr/">Buy</a>
+          </li>
+          <li>💗</li>
+          <li>
+            <a href="https://lovestaking.mescryptos.fr/">Stake</a>
+          </li>
+        </ul>
+      </nav>
+      <div className="App">
+        <h1>The LOVE staking facility</h1>
+        <header className="App-header">
+          {isConnected === true ?
+            <>
+              <div className="header-container"> 
+                <div className="header-image">
+                  <img src="/staking.jpg" className="App-logo" alt="logo" />
+                </div>
+                <div className="header-infos">
+                  <p>
+                    Account: {account.substring(0, 6)+'...'+account.substring(account.length-4, account.length)}<br />
+                    ZEN Balance: {parseFloat(balance > 0.000000001 ? balance : 0).toFixed(3)}<br />
+                    $LOVE Balance: {parseFloat(loveBalance > 0.000000001 ? loveBalance : 0).toFixed(3)}<br />
+                    $LOVE Staked: {parseFloat(stakeBalance > 0.000000001 ? stakeBalance : 0).toFixed(3)}<br />
+                    $LOVE Rewards: {parseFloat(rewardsBalance > 0.000000001 ? rewardsBalance : 0).toFixed(3)}
+                  </p>
                 </div>
               </div>
-            }
-            {
-              rewardsBalance > 0 &&
-              <button onClick={claimRewards} disabled={claimBtnString === "Claim rewards" ? "" : "disabled"}>{claimBtnString}</button>
-            }
-            {
-              stakeBalance > 0 &&
-              <button onClick={unstakeLove} disabled={unstakeBtnString === "Unstake LOVE" ? "" : "disabled"}>{unstakeBtnString}</button>
-            }
-            {
-              stakeBalance == 0 && 
-              stakeAmount > 0 && 
-              approvedLOVE < stakeAmount &&
-              <button onClick={approveLove} disabled={approveBtnString === "Approve LOVE" ? "" : "disabled"}>{approveBtnString}</button>
-            }
-            {
-              stakeBalance == 0 && 
-              stakeAmount > 0 && 
-              approvedLOVE >= stakeAmount &&
-              <button onClick={stakeLove} disabled={stakeBtnString === "Stake LOVE" ? "" : "disabled"}>{stakeBtnString}</button>
-            }
-          </>
-        :
-          <>
-            <img src="/staking.jpg" className="App-logo" alt="logo" />
-            <button className="connectButton" onClick={connectWallet}  disabled={connectBtnString === "Connect Wallet" ? "" : "disabled"}>{connectBtnString}</button>
-          </>
-        }
-      </header>
-    </div>
+              {
+                stakeBalance == 0 && 
+                <div className="inputDiv">
+                  <div className="inputToken">LOVE</div>
+                  <input type="text" value={stakeAmount} onChange={(e) => setStakeAmount(e.target.value)} />
+                  <div className="inputQties">
+                  <a href="#25" onClick={(e) => setStakeAmount(loveBalance/4)}>25%</a>
+                  <a href="#50" onClick={(e) => setStakeAmount(loveBalance/2)}>50%</a>
+                  <a href="#75" onClick={(e) => setStakeAmount(loveBalance*3/4)}>75%</a>
+                  <a href="#100" onClick={(e) => setStakeAmount(loveBalance)}>100%</a>
+                  </div>
+                </div>
+              }
+              {
+                rewardsBalance > 0 &&
+                <button onClick={claimRewards} disabled={claimBtnString === "Claim rewards" ? "" : "disabled"}>{claimBtnString}</button>
+              }
+              {
+                stakeBalance > 0 &&
+                <button onClick={unstakeLove} disabled={unstakeBtnString === "Unstake LOVE" ? "" : "disabled"}>{unstakeBtnString}</button>
+              }
+              {
+                stakeBalance == 0 && 
+                stakeAmount > 0 && 
+                approvedLOVE < stakeAmount &&
+                <button onClick={approveLove} disabled={approveBtnString === "Approve LOVE" ? "" : "disabled"}>{approveBtnString}</button>
+              }
+              {
+                stakeBalance == 0 && 
+                stakeAmount > 0 && 
+                approvedLOVE >= stakeAmount &&
+                <button onClick={stakeLove} disabled={stakeBtnString === "Stake LOVE" ? "" : "disabled"}>{stakeBtnString}</button>
+              }
+            </>
+          :
+            <>
+              <img src="/staking.jpg" className="App-logo" alt="logo" />
+              <button className="connectButton" onClick={connectWallet}  disabled={connectBtnString === "Connect Wallet" ? "" : "disabled"}>{connectBtnString}</button>
+            </>
+          }
+        </header>
+      </div>
+    </>  
   );
 }
 
