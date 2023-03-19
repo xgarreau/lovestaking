@@ -64,7 +64,6 @@ footer a:hover {
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-header button {
@@ -152,4 +151,8 @@ footer a:hover {
 
 .App-link {
   color: #f0f;
+}
+
+.network-error {
+  padding: 20px;
 }

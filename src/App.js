@@ -55,6 +55,10 @@ function App() {
     setConnectBtnString("💗");
     try {
       const ethProvider = new ethers.providers.Web3Provider(window.ethereum);
+
+      const currNetwork = await ethProvider.getNetwork();
+      setIsYuma(currNetwork.chainId.toString() === "1662");
+
       await ethProvider.send('eth_requestAccounts', []);
       const signer = await ethProvider.getSigner();
 
@@ -157,7 +161,7 @@ function App() {
       <div className="App">
         <h1>The LOVE staking facility</h1>
         <header className="App-header">
-          {isConnected === true ?
+          {isConnected === true && isYuma === true ?
             <>
               <div className="header-container"> 
                 <div className="header-image">
@@ -210,7 +214,8 @@ function App() {
           :
             <>
               <img src="/staking.jpg" className="App-logo" alt="logo" />
-              <button className="connectButton" onClick={connectWallet}  disabled={connectBtnString === "Connect Wallet" ? "" : "disabled"}>{connectBtnString}</button>
+              {!isYuma && <div className="network-error">Please switch to Yuma network</div>}
+              {isYuma && !isConnected && <button className="connectButton" onClick={connectWallet}  disabled={connectBtnString === "Connect Wallet" ? "" : "disabled"}>{connectBtnString}</button>}
             </>
           }
         </header>
