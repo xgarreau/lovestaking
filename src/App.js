@@ -15,6 +15,7 @@ if (window.ethereum) {
 
 function App() {
   const [isConnected, setConnected] = useState(false);
+  const [isYuma, setIsYuma] = useState(true);
   const [connectBtnString, setConnectBtnString] = useState("Connect Wallet")
   const [claimBtnString, setClaimBtnString] = useState("Claim rewards")
   const [unstakeBtnString, setUnstakeBtnString] = useState("Unstake LOVE")
@@ -63,12 +64,6 @@ function App() {
       setBalance(parseFloat(ethers.utils.formatEther(signerBalance)));
 
       await updateBalances();
-
-      const contract = new ethers.Contract(STAKING_CONTRACT_ADDRESS, stakingABI, signer);
-      const signerStakingInfo = await contract.stakes(signerAddress);
-      const signerRewardsBalance = await contract.computeRewards();
-      setStakeBalance(ethers.utils.formatEther(signerStakingInfo.nbStaked));
-      setRewardsBalance(ethers.utils.formatEther(signerRewardsBalance));
 
       setConnected (true);
     } catch (e) {
