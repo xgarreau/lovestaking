@@ -98,11 +98,20 @@ function App() {
   async function stakeLove() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
+    const signerAddress = await signer.getAddress();
     const contract = new ethers.Contract(STAKING_CONTRACT_ADDRESS, stakingABI, signer);
-    const amount = ethers.utils.parseEther(stakeAmount.toString());
+    const loveContract = new ethers.Contract(LOVE_CONTRACT_ADDRESS, loveABI, signer);
+    const signerLoveBalance = await loveContract.balanceOf(signerAddress);
+    let amount = ethers.utils.parseEther(stakeAmount.toString());
+
+    // Pour contrecarrer les erreurs d'arrondi
+    if (amount.gt(signerLoveBalance)) {
+      amount = signerLoveBalance;
+    }
+
     setStakeBtnString("💗");
     try {
-      const tx = await contract.stake(amount);
+      const tx = await contract.stake(amount.toString());
       await tx.wait();
     } catch (e) {
       console.log(e);
